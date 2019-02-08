@@ -1,41 +1,12 @@
+'''
+left click for zoom in 10x
+right click for zoom out 10x
+counting time about 2 - 3 sec
+'''
+
 import numpy as np
 from tkinter import *
 from PIL import Image, ImageTk
-import time
-
-
-def dekahex2(n):
-    n = int(n)
-    lc = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
-    return lc[(n % 256) // 16] + lc[n % 16]
-
-
-def rgb(red, green, blue):
-    return '#' + dekahex2(red) + dekahex2(green) + dekahex2(blue)
-
-
-def gray(a):
-    return 'gray'+str(a % 100)
-
-
-def blue(a):
-    return '#0000'+dekahex2(a)
-
-
-def pink(a):
-    return '#' + dekahex2(a) + '00' + dekahex2(a)
-
-
-def yellow(a):
-    return '#' + dekahex2(a) + dekahex2(a) + '00'
-
-
-def forMarina(a):
-    return '#' + dekahex2(a) + dekahex2(2*a) + dekahex2(-a)
-
-
-def greenblue(a):
-    return '#00' + dekahex2(-a) + dekahex2(a)
 
 
 W = 1000
@@ -43,8 +14,8 @@ H = 1000
 repeat = 124
 top_num = 999999999999999
 koe = 7
-x_center, y_center = (1, 0)
-zoom = 4
+x_center, y_center = (-0.5, 0)
+zoom = 1
 
 
 def draw_fractal(event=0):
@@ -71,13 +42,12 @@ def draw_fractal(event=0):
     mach = np.zeros((H, W), dtype='bool')
     for _ in range(repeat):
         z = z * z + a
-        z /= a
         mach += z.real > top_num
         res += mach
 
     res *= koe
     r_arr = res
-    g_arr = res*2
+    g_arr = res * 2
     b_arr = -res
     colors = np.hstack((r_arr, g_arr, b_arr)).reshape((H, W, 3), order='F')
 
