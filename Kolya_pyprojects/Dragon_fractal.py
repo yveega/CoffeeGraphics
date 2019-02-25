@@ -5,7 +5,6 @@ r = Tk()
 c = Canvas(r, width=2500, height=1000, bg="black")
 CC = TT.ColorCube(r_step=0.4, g_step=-0.2, b_step=-0.3)
 t = TT.Turtle(c, x=200, y=800, color=CC(), draw=True)
-
 c.pack()
 
 
