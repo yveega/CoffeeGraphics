@@ -11,11 +11,11 @@ from PIL import Image, ImageTk
 
 W = 1000
 H = 1000
-repeat = 124
+repeat = 240
 top_num = 999999999999999
 koe = 7
 x_center, y_center = (-0.5, 0)
-zoom = 1
+zoom = 2
 
 
 def draw_fractal(event=0):
@@ -46,8 +46,8 @@ def draw_fractal(event=0):
         res += mach
 
     res *= koe
-    r_arr = res
-    g_arr = res * 2
+    g_arr = res
+    r_arr = res//2
     b_arr = -res
     colors = np.hstack((r_arr, g_arr, b_arr)).reshape((H, W, 3), order='F')
 
