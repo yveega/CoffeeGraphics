@@ -75,11 +75,12 @@ class Turtle3D:
         self.pen = True
         self.lineList = lineList
         self.color = "red"
+        self.width = 1
     
     def forward(self, points):
         new_pos = self.pos + self.face * points
         if self.pen:
-            self.lineList.append(Line(self.pos, new_pos, self.color))
+            self.lineList.append(Line(self.pos, new_pos, self.color, self.width))
         self.pos = new_pos
     
     def goto(self, x, y, z):
@@ -124,14 +125,15 @@ SIZE = 150
 
 
 class Line:
-    def __init__(self, start: Vector3, end: Vector3, color="purple") -> None:
+    def __init__(self, start: Vector3, end: Vector3, color="purple", width=1) -> None:
         self.start = start
         self.end = end
         self.color = color
+        self.width = 1
     
     def drow_projection(self, canvas: Canvas, camera: Turtle3D, screen_dist):
         start_x, start_y = self.start.projection(camera, screen_dist)
         end_x, end_y = self.end.projection(camera, screen_dist)
         start_x, start_y = W/2 + start_x * SIZE, H/2 - start_y * SIZE
         end_x, end_y = W/2 + end_x * SIZE, H/2 - end_y * SIZE
-        canvas.create_line(start_x, start_y, end_x, end_y, fill=self.color)
+        canvas.create_line(start_x, start_y, end_x, end_y, fill=self.color, width=self.width)
